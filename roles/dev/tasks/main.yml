@@ -1,0 +1,28 @@
+---
+- name: Install core packages
+  ansible.builtin.include_tasks:
+    file: core.yml
+    apply:
+      tags: core
+  tags: always
+
+- name: Install Emacs from source
+  ansible.builtin.include_tasks:
+    file: emacs.yml
+    apply:
+      tags: emacs
+  tags: emacs
+
+- name: Install nvm and Node.js
+  ansible.builtin.include_tasks:
+    file: nvm.yml
+    apply:
+      tags: nvm
+  tags: nvm
+
+- name: Install Docker
+  ansible.builtin.include_tasks:
+    file: docker.yml
+    apply:
+      tags: docker
+  tags: docker

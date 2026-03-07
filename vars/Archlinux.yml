@@ -1,0 +1,30 @@
+core_dev_pkgs:
+  - git
+  - curl
+  - wget
+  - gcc
+  - make
+  - base
+  - base-devel
+  - pkgconf
+  - python
+  - jq
+
+emacs_dependencies:
+  - libgccjit
+  - gnutls
+  - gmp
+  - gtk3
+  - cairo
+  - harfbuzz
+  - libotf
+  - giflib
+  - libpng
+  - libwebp
+  - libjpeg-turbo
+  - libtiff
+  - libxml2
+  - tree-sitter
+  - sqlite
+  - texinfo
+  - autoconf

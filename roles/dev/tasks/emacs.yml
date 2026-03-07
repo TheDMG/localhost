@@ -1,0 +1,45 @@
+---
+- name: Install Emacs build dependencies
+  become: true
+  ansible.builtin.package:
+    name: "{{ emacs_dependencies }}"
+    state: present
+
+- name: Clone Emacs repository
+  ansible.builtin.git:
+    repo: "{{ repos.emacs }}"
+    dest: "{{ src_dir }}/emacs"
+    version: master
+    depth: 1
+
+- name: Run autogen.sh
+  ansible.builtin.command:
+    cmd: ./autogen.sh
+    chdir: "{{ src_dir }}/emacs"
+
+
+- name: Configure Emacs
+  ansible.builtin.command:
+    cmd: >
+      ./configure
+      --with-native-compilation=aot
+      --with-tree-sitter
+      --with-pgtk
+      --with-sqlite3
+      --with-webp
+      --without-gsettings
+      --without-gconf
+    chdir: "{{ src_dir }}/emacs"
+
+
+- name: Build Emacs
+  ansible.builtin.command:
+    cmd: "make -j{{ ansible_facts['processor_vcpus'] }}"
+    chdir: "{{ src_dir }}/emacs"
+
+
+- name: Install Emacs
+  become: true
+  ansible.builtin.command:
+    cmd: make install
+    chdir: "{{ src_dir }}/emacs"

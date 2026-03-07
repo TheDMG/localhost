@@ -1,0 +1,29 @@
+---
+- name: Don't Try This At Home
+  hosts: localhost
+  vars_files:
+    - vars/default.yml
+  pre_tasks:
+    - name: Sync package databases
+      become: true
+      ansible.builtin.pacman:
+        update_cache: true
+      tags:
+        - core
+        - emacs
+        - docker
+
+    - name: Load OS-specific variables
+      ansible.builtin.include_vars:
+        file: "{{ lookup('ansible.builtin.first_found', params) }}"
+      vars:
+        params:
+          files:
+            - "{{ ansible_facts['distribution'] }}.yml"
+            - "{{ ansible_facts['os_family'] }}.yml"
+            - default.yml
+          paths:
+            - vars
+      tags: always
+  roles:
+    - dev
