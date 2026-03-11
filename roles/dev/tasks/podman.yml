@@ -1,0 +1,6 @@
+---
+- name: Install Podman
+  become: true
+  ansible.builtin.package:
+    name: "{{ dev_packages.podman }}"
+    state: present

@@ -11,7 +11,28 @@
     file: emacs.yml
     apply:
       tags: emacs
-  tags: emacs
+  tags:
+    - emacs
+    - full_emacs
+
+- name: Install Emacs config
+  ansible.builtin.include_tasks:
+    file: emacs_config.yml
+    apply:
+      tags: emacs_config
+  tags:
+    - emacs_config
+    - full_emacs
+
+- name: Install LSP servers
+  ansible.builtin.include_tasks:
+    file: lsp.yml
+    apply:
+      tags: lsp
+  tags:
+    - lsp
+    - emacs_config
+    - full_emacs
 
 - name: Install nvm and Node.js
   ansible.builtin.include_tasks:
@@ -19,6 +40,15 @@
     apply:
       tags: nvm
   tags: nvm
+
+- name: Install Podman
+  ansible.builtin.include_tasks:
+    file: podman.yml
+    apply:
+      tags: podman
+  tags:
+    - podman
+    - docker
 
 - name: Install Docker
   ansible.builtin.include_tasks:

@@ -1,0 +1,6 @@
+---
+- name: Install LSP servers
+  become: true
+  ansible.builtin.package:
+    name: "{{ dev_packages.lsp }}"
+    state: present

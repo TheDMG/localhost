@@ -1,8 +1,8 @@
 ---
 - name: Install Docker
   become: true
-  ansible.builtin.pacman:
-    name: docker
+  ansible.builtin.package:
+    name: "{{ dev_packages.docker }}"
     state: present
 
 - name: Enable and start Docker service

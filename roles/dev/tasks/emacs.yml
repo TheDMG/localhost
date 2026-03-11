@@ -2,7 +2,7 @@
 - name: Install Emacs build dependencies
   become: true
   ansible.builtin.package:
-    name: "{{ emacs_dependencies }}"
+    name: "{{ build_dependencies.emacs }}"
     state: present
 
 - name: Clone Emacs repository

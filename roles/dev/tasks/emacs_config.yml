@@ -1,0 +1,27 @@
+---
+- name: Check if ~/.emacs.d exists
+  ansible.builtin.stat:
+    path: "{{ ansible_facts['env']['HOME'] }}/.emacs.d"
+  register: emacs_d
+
+- name: Check if ~/.emacs.d is a git repo and get remote URL
+  ansible.builtin.command:
+    cmd: git remote get-url origin
+    chdir: "{{ ansible_facts['env']['HOME'] }}/.emacs.d"
+  register: emacs_d_remote
+  when: emacs_d.stat.exists
+  failed_when: false
+  changed_when: false
+
+- name: Backup ~/.emacs.d if not a git repo or remote differs
+  ansible.builtin.command:
+    cmd: mv {{ ansible_facts['env']['HOME'] }}/.emacs.d {{ ansible_facts['env']['HOME'] }}/.emacs.d.bak.{{ ansible_facts['date_time']['iso8601_basic_short'] }}
+  when:
+    - emacs_d.stat.exists
+    - emacs_d_remote.rc != 0 or emacs_d_remote.stdout != repos.emacs_config
+
+- name: Clone Emacs config
+  ansible.builtin.git:
+    repo: "{{ repos.emacs_config }}"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.emacs.d"
+    version: master

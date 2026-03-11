@@ -2,5 +2,6 @@ src_dir: "{{ ansible_facts['env']['HOME'] }}/.local/src"
 
 repos:
   emacs: https://git.savannah.gnu.org/git/emacs.git
+  emacs_config: https://github.com/TheDMG/.emacs.d
 
 nvm_version: v0.40.4

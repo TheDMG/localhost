@@ -1,30 +1,43 @@
-core_dev_pkgs:
-  - git
-  - curl
-  - wget
-  - gcc
-  - make
-  - base
-  - base-devel
-  - pkgconf
-  - python
-  - jq
+dev_packages:
+  core:
+    - git
+    - curl
+    - wget
+    - gcc
+    - make
+    - base
+    - base-devel
+    - pkgconf
+    - python
+    - jq
+  docker:
+    - docker
+    - docker-compose
+    - docker-buildx
+  podman:
+    - podman
+  lsp:
+    - clang
+    - gopls
+    - pyright
 
-emacs_dependencies:
-  - libgccjit
-  - gnutls
-  - gmp
-  - gtk3
-  - cairo
-  - harfbuzz
-  - libotf
-  - giflib
-  - libpng
-  - libwebp
-  - libjpeg-turbo
-  - libtiff
-  - libxml2
-  - tree-sitter
-  - sqlite
-  - texinfo
-  - autoconf
+
+build_dependencies:
+  emacs:
+    - libgccjit
+    - gnutls
+    - gmp
+    - gtk3
+    - cairo
+    - harfbuzz
+    - libotf
+    - giflib
+    - libpng
+    - libwebp
+    - libjpeg-turbo
+    - libtiff
+    - libxml2
+    - tree-sitter
+    - sqlite
+    - texinfo
+    - autoconf

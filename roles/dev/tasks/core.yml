@@ -2,5 +2,5 @@
 - name: Install core development packages
   become: true
   ansible.builtin.package:
-    name: "{{ core_dev_pkgs }}"
+    name: "{{ dev_packages.core }}"
     state: present

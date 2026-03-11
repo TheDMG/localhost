@@ -8,9 +8,12 @@
       become: true
       ansible.builtin.pacman:
         update_cache: true
+      when: ansible_facts['os_family'] == 'Archlinux'
       tags:
         - core
         - emacs
+        - emacs_config
+        - full_emacs
         - docker
 
     - name: Load OS-specific variables
