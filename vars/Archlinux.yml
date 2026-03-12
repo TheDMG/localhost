@@ -9,6 +9,8 @@ dev_packages:
     - base-devel
     - pkgconf
     - python
+    - nodejs-lts
+    - npm
     - jq
   docker:
     - docker
@@ -16,14 +18,9 @@ dev_packages:
     - docker-buildx
   podman:
     - podman
-  lsp:
-    - clang
-    - gopls
-    - pyright
 
-
-build_dependencies:
-  emacs:
+emacs:
+  build:
     - libgccjit
     - gnutls
     - gmp
@@ -41,3 +38,10 @@ build_dependencies:
     - sqlite
     - texinfo
     - autoconf
+  lsp:
+    - clang
+    - gopls
+    - pyright
+  config:
+    - alsa-utils
+    - tree-sitter

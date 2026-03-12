@@ -1,4 +1,10 @@
 ---
+- name: Ensure emacs configs dependencies are installed
+  become: true
+  ansible.builtin.package:
+    name: "{{ emacs.config }}"
+    state: present
+
 - name: Check if ~/.emacs.d exists
   ansible.builtin.stat:
     path: "{{ ansible_facts['env']['HOME'] }}/.emacs.d"

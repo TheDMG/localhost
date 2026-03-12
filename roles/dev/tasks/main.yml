@@ -34,7 +34,17 @@
     - emacs_config
     - full_emacs
 
-- name: Install nvm and Node.js
+- name: Install AI agents
+  ansible.builtin.include_tasks:
+    file: ai_agents.yml
+    apply:
+      tags: ai_agents
+  tags:
+    - ai_agents
+    - emacs_config
+    - full_emacs
+
+- name: Install nvm
   ansible.builtin.include_tasks:
     file: nvm.yml
     apply:

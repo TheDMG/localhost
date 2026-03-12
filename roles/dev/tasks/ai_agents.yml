@@ -1,0 +1,25 @@
+---
+- name: Ensure nodejs-lts and npm are installed
+  become: true
+  ansible.builtin.package:
+    name:
+      - nodejs-lts
+      - npm
+    state: present
+
+- name: Install Claude Code via native installer
+  ansible.builtin.shell:
+    cmd: curl -fsSL https://claude.ai/install.sh | bash
+    creates: "{{ ansible_env.HOME }}/.claude/local/claude"
+
+- name: Install AI coding agents and ACPs via npm
+  become: true
+  community.general.npm:
+    name: "{{ item }}"
+    global: true
+    state: present
+  loop:
+    - "@zed-industries/claude-agent-acp"
+    - "@openai/codex"
+    - "@zed-industries/codex-acp"
+    - "@google/gemini-cli"
